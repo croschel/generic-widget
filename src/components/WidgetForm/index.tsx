@@ -5,6 +5,7 @@ import ideiaImg from "../../assets/idea.svg";
 import thoughtImg from "../../assets/thought.svg";
 import { FeedbackTypeStep } from "./Steps/FeedbackTypeStep";
 import { FeedbackContentStep } from "./Steps/FeedbackContentStep";
+import { FeedbackSucessStep } from "./Steps/FeedbackSucessStep";
 
 export const feedBackTypes = {
   BUG: {
@@ -34,19 +35,30 @@ export type FeedBackType = keyof typeof feedBackTypes;
 
 export const WidgetForm: React.FC = () => {
   const [feedBackType, setFeedBackType] = useState<FeedBackType | null>(null);
+  const [feedbackSent, setFeedbackSent] = useState(false);
 
   const handleRestartFeedback = () => {
+    setFeedbackSent(false);
     setFeedBackType(null);
   };
   return (
     <div className="bg-zinc-900 p-4 relative rounded-2xl mb-4 flex flex-col items-center shadow-lg w-[calc(100vw-2rem)] md:w-auto">
-      {!feedBackType ? (
-        <FeedbackTypeStep onFeedbackTypeChanged={setFeedBackType} />
-      ) : (
-        <FeedbackContentStep
+      {feedbackSent ? (
+        <FeedbackSucessStep
           onFeedbackRestartRequested={handleRestartFeedback}
-          feedbackType={feedBackType}
         />
+      ) : (
+        <>
+          {!feedBackType ? (
+            <FeedbackTypeStep onFeedbackTypeChanged={setFeedBackType} />
+          ) : (
+            <FeedbackContentStep
+              onFeedbackSent={() => setFeedbackSent(true)}
+              onFeedbackRestartRequested={handleRestartFeedback}
+              feedbackType={feedBackType}
+            />
+          )}
+        </>
       )}
       <footer className="text-xs text-neutral-400">
         Feito com ❤️‍🔥 por{" "}

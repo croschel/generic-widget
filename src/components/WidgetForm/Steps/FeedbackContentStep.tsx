@@ -1,4 +1,4 @@
-import { ArrowLeft, Camera } from "phosphor-react";
+import { ArrowLeft } from "phosphor-react";
 import React, { FormEvent, useState } from "react";
 import { FeedBackType, feedBackTypes } from "..";
 import { ClosedButton } from "../../ClosedButton";
@@ -7,11 +7,13 @@ import { ScreenShotButton } from "../../ScreenshotButton";
 interface FeedbackContentProps {
   feedbackType: FeedBackType;
   onFeedbackRestartRequested: () => void;
+  onFeedbackSent: () => void;
 }
 
 export const FeedbackContentStep: React.FC<FeedbackContentProps> = ({
   feedbackType,
   onFeedbackRestartRequested,
+  onFeedbackSent,
 }) => {
   const [comment, setComment] = useState<string>("");
   const [screenshot, setScreenshot] = useState<string | null>(null);
@@ -20,6 +22,7 @@ export const FeedbackContentStep: React.FC<FeedbackContentProps> = ({
   const handleSubmitFeedback = (event: FormEvent) => {
     event.preventDefault();
     console.log(screenshot, comment);
+    onFeedbackSent();
   };
 
   return (

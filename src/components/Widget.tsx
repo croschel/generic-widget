@@ -1,11 +1,14 @@
 import React from "react";
 import { ChatCenteredDots } from "phosphor-react";
 import { Popover } from "@headlessui/react";
+import { WidgetForm } from "./WidgetForm";
 
 export const Widget: React.FC = () => {
   return (
-    <Popover className="absolute bottom-5 right-5">
-      <Popover.Panel>Hello popover</Popover.Panel>
+    <Popover className="absolute bottom-4 right-4 flex flex-col items-end md:bottom-5 md:right-5">
+      <Popover.Panel>
+        <WidgetForm />
+      </Popover.Panel>
 
       <Popover.Button className="bg-brand-500 rounded-full px-3 h-12 text-white flex items-center group">
         <ChatCenteredDots className="w-6 h-6" />

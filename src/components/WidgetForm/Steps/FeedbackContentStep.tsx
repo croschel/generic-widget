@@ -21,7 +21,6 @@ export const FeedbackContentStep: React.FC<FeedbackContentProps> = ({
 
   const handleSubmitFeedback = (event: FormEvent) => {
     event.preventDefault();
-    console.log(screenshot, comment);
     onFeedbackSent();
   };
 
